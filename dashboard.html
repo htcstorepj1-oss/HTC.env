@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | HTC Academy</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+  <div class="background-glow"></div>
+
+  <div class="card">
+    <div class="logo-area">
+      <i class="ph ph-user-circle-gear" style="color: #10b981;"></i>
+      <h1>Área do <span>Aluno</span></h1>
+    </div>
+    
+    <p>Acesso autorizado. Você já pode visualizar seus cursos e materiais exclusivos.</p>
+
+    <button id="logoutBtn" class="btn-logout">
+      <i class="ph ph-sign-out"></i> Sair da Conta
+    </button>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDFyFLD_IZO2WxQiaatsX0FCflWSXc66_4",
+      authDomain: "htc-16a4f.firebaseapp.com",
+      projectId: "htc-16a4f",
+      storageBucket: "htc-16a4f.appspot.com",
+      messagingSenderId: "309059583259",
+      appId: "1:309059583259:web:d6461faf733f5995e4a7be"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Proteção de rota: Se não estiver logado, volta para o login
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = "index.html";
+      }
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      signOut(auth).then(() => {
+        window.location.href = "index.html";
+      });
+    });
+  </script>
+
+</body>
+</html>
