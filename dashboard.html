@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - HTC Academy</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .nav-menu { display: flex; gap: 20px; margin-bottom: 20px; background: #1a1a2e; padding: 15px; border-radius: 10px; justify-content: space-around;}
+        .nav-menu button { background: #4cc9f0; border: none; color: white; cursor: pointer; font-weight: bold; padding: 8px 15px; border-radius: 5px; }
+        .admin-section { background: #16213e; padding: 20px; border-radius: 10px; margin-top: 20px; display: none; border: 1px solid #4cc9f0; }
+        .course-card { background: rgba(255,255,255,0.05); padding: 15px; margin: 10px 0; border-radius: 8px; border-left: 5px solid #4cc9f0; }
+        input { width: 100%; padding: 10px; margin: 5px 0; border-radius: 5px; border: none; background: #0f0f1b; color: white; }
+        .btn-add { background: #4cc9f0; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; width: 100%; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <nav class="nav-menu">
+            <button onclick="showSection('home')">Início</button>
+            <button id="adminTab" style="display: none;" onclick="showSection('admin')">Admin</button>
+            <button id="logoutBtn">Sair</button>
+        </nav>
+
+        <section id="homeSection">
+            <h2>Cursos Disponíveis</h2>
+            <div id="listaCursos"></div>
+        </section>
+
+        <section id="adminSection" class="admin-section">
+            <h2>Painel do Professor</h2>
+            <input type="text" id="courseName" placeholder="Nome do Curso">
+            <input type="text" id="courseLink" placeholder="Link da Aula">
+            <button class="btn-add" id="saveCourse">Publicar Curso</button>
+        </section>
+    </div>
+
+    <script type="module">
+        import{initializeApp as _0x1}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";import{getAuth as _0x2,onAuthStateChanged as _0x3,signOut as _0x4}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";import{getFirestore as _0x5,collection as _0x6,addDoc as _0x7,getDocs as _0x8}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";const _0x9={apiKey:"AIzaSyDFyFLD_IZO2WxQiaatsX0FCflWSXc66_4",authDomain:"htc-16a4f.firebaseapp.com",projectId:"htc-16a4f",storageBucket:"htc-16a4f.appspot.com",messagingSenderId:"309059583259",appId:"1:309059583259:web:d6461faf733f5995e4a7be"};const _0xa=_0x1(_0x9);const _0xb=_0x2(_0xa);const _0xc=_0x5(_0xa);_0x3(_0xb,(_0xd)=>{if(_0xd){if(_0xd.email==="htc.storepj1@gmail.com"){document.getElementById("adminTab").style.display="block"}_0xe()}else{window.location.href="index.html"}});document.getElementById("saveCourse").addEventListener("click",async()=>{const _0xf=document.getElementById("courseName").value;const _0x10=document.getElementById("courseLink").value;if(_0xf&&_0x10){try{await _0x7(_0x6(_0xc,"cursos"),{nome:_0xf,url:_0x10,data:new Date()});alert("Sucesso!");location.reload()}catch(_0x11){alert("Erro")}}});async function _0xe(){const _0x12=await _0x8(_0x6(_0xc,"cursos"));const _0x13=document.getElementById("listaCursos");_0x13.innerHTML="";_0x12.forEach((_0x14)=>{const _0x15=_0x14.data();_0x13.innerHTML+=`<div class="course-card"><h3>${_0x15.nome}</h3><a href="${_0x15.url}" target="_blank" style="color:#4cc9f0">Assistir Agora</a></div>`})}window.showSection=(_0x16)=>{document.getElementById("homeSection").style.display=_0x16==='home'?'block':'none';document.getElementById("adminSection").style.display=_0x16==='admin'?'block':'none'};document.getElementById("logoutBtn").addEventListener("click",()=>{_0x4(_0xb).then(()=>window.location.href="index.html")});
+    </script>
+</body>
+</html>
