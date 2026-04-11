@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' blob: data: https://* http://*; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;">
+    <title>CyberStream Pro - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Tela de Boas-vindas / Adicionar Lista -->
+        <div id="setupScreen" class="overlay-screen">
+            <div class="setup-box">
+                <h1>Cyber<span>Stream</span> Pro</h1>
+                <p>Insira sua lista M3U para começar</p>
+                <input type="url" id="m3uUrl" placeholder="https://exemplo.com/lista.m3u">
+                <div class="setup-buttons">
+                    <button id="loadBtn" class="primary-btn">Carregar via URL</button>
+                    <label class="secondary-btn">
+                        Subir Arquivo .M3U
+                        <input type="file" id="fileInput" hidden>
+                    </label>
+                </div>
+                <p class="hint">Nota: Se a URL não carregar, tente subir o arquivo direto.</p>
+            </div>
+        </div>
+
+        <!-- Dashboard Principal -->
+        <main id="mainDashboard" class="hidden">
+            <header class="top-bar">
+                <div class="logo">Cyber<span>Stream</span></div>
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Buscar título...">
+                </div>
+                <button id="changeListBtn" class="icon-btn">🔄 Trocar Lista</button>
+            </header>
+
+            <!-- Grid de Categorias "Quadro" -->
+            <section id="categoryGrid" class="category-grid">
+                <div class="cat-card" data-type="live">
+                    <div class="icon">📺</div>
+                    <h3>Canais Ao Vivo</h3>
+                    <span id="count-live">0 itens</span>
+                </div>
+                <div class="cat-card" data-type="movie">
+                    <div class="icon">🎬</div>
+                    <h3>Filmes</h3>
+                    <span id="count-movie">0 itens</span>
+                </div>
+                <div class="cat-card" data-type="series">
+                    <div class="icon">🍿</div>
+                    <h3>Séries</h3>
+                    <span id="count-series">0 itens</span>
+                </div>
+            </section>
+
+            <!-- Container do Player e Lista -->
+            <div id="contentArea" class="hidden">
+                <button id="backToDash" class="back-btn">← Voltar ao Início</button>
+                <div class="view-layout">
+                    <aside class="sidebar">
+                        <div id="groupList" class="group-list"></div>
+                        <div id="itemList" class="item-grid"></div>
+                        <div id="sentinel"></div>
+                    </aside>
+                    <section class="player-wrapper">
+                        <div class="video-container">
+                            <video id="mainVideo" controls autoplay playsinline></video>
+                        </div>
+                        <div class="video-info">
+                            <h2 id="nowPlayingTitle">Selecione um item</h2>
+                            <p id="nowPlayingInfo"></p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js" type="module"></script>
+</body>
+</html>
