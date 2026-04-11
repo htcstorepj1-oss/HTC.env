@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSP: Segurança contra injeções, permitindo streams externos -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' blob: data: *; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;">
+    <title>CyberStream Pro | IBO Edition</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- HLS.js Engine 2024 -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
+<body>
+    <div id="app" class="dark-theme">
+        <!-- Loader Global -->
+        <div id="globalLoader" class="loader-overlay hidden">
+            <div class="spinner"></div>
+            <p>Sincronizando conteúdos...</p>
+        </div>
+
+        <!-- Tela de Seleção de Playlist (Estilo IBO) -->
+        <section id="portalScreen" class="screen">
+            <div class="portal-content">
+                <header class="portal-header">
+                    <h1 class="logo">CYBER<span>STREAM</span></h1>
+                    <p>Selecione seu perfil de acesso</p>
+                </header>
+                <div id="playlistGrid" class="playlist-grid">
+                    <!-- Gerado via JS -->
+                    <button class="add-card" id="openAddModal">
+                        <span>+</span>
+                        <p>Adicionar Lista</p>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard de Conteúdo (Estilo Netflix/IBO) -->
+        <main id="playerScreen" class="screen hidden">
+            <aside class="sidebar">
+                <div class="nav-brand">CS</div>
+                <nav class="nav-menu">
+                    <button class="nav-btn active" data-type="live" title="Canais">📺</button>
+                    <button class="nav-btn" data-type="movie" title="Filmes">🎬</button>
+                    <button class="nav-btn" data-type="series" title="Séries">🍿</button>
+                    <button class="nav-btn" id="btnFavs" title="Favoritos">⭐</button>
+                </nav>
+                <button class="nav-btn logout" id="btnBackPortal">🚪</button>
+            </aside>
+
+            <section class="main-content">
+                <header class="content-header">
+                    <div class="search-wrapper">
+                        <input type="text" id="mainSearch" placeholder="O que vamos assistir hoje?">
+                    </div>
+                    <div id="categoryBar" class="category-scroll"></div>
+                </header>
+
+                <div class="content-body">
+                    <div id="mediaGrid" class="media-grid"></div>
+                    <div id="scrollSentinel"></div>
+                </div>
+            </section>
+
+            <!-- Mini Player / Player Expandido -->
+            <div id="playerOverlay" class="player-overlay hidden">
+                <div class="player-container">
+                    <video id="mainVideo" controls autoplay playsinline></video>
+                    <button class="close-player">✕</button>
+                </div>
+                <div class="video-details">
+                    <h2 id="videoTitle">Título do Canal</h2>
+                    <p id="videoMeta">Categoria • 1080p</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Modal de Cadastro Dual (M3U / Xtream) -->
+        <div id="addModal" class="modal hidden">
+            <div class="modal-card">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="m3u">M3U Link</button>
+                    <button class="tab-btn" data-tab="xtream">Xtream Codes</button>
+                </div>
+                
+                <div class="tab-content" id="m3uFields">
+                    <input type="text" id="m3uName" placeholder="Nome da Lista">
+                    <input type="url" id="m3uUrl" placeholder="URL da Playlist .m3u">
+                </div>
+
+                <div class="tab-content hidden" id="xtreamFields">
+                    <input type="text" id="xtName" placeholder="Nome do Servidor">
+                    <input type="url" id="xtHost" placeholder="Host (Ex: http://url.com:8080)">
+                    <input type="text" id="xtUser" placeholder="Usuário">
+                    <input type="password" id="xtPass" placeholder="Senha">
+                </div>
+
+                <div class="modal-footer">
+                    <button class="primary-btn" id="savePlaylistBtn">Conectar</button>
+                    <button class="cancel-btn" id="closeAddModal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js" type="module"></script>
+</body>
+</html>
