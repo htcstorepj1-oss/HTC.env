@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' blob: data: *; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;">
+    <title>CyberStream IBO-Clone v3</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Gerenciador de Listas (Estilo IBO) -->
+        <section id="playlistManager" class="screen">
+            <div class="glass-container">
+                <h1>Cyber<span>Stream</span> Elite</h1>
+                <div class="list-cards" id="savedLists">
+                    <!-- Listas salvas aparecem aqui -->
+                </div>
+                <button id="addNewListBtn" class="primary-btn">+ Adicionar Nova Lista</button>
+            </div>
+        </section>
+
+        <!-- Modal de Cadastro de Lista -->
+        <div id="listModal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Configurar Lista M3U</h2>
+                <input type="text" id="listName" placeholder="Nome da Lista (Ex: Minha TV)">
+                <input type="url" id="listUrl" placeholder="URL da Lista .m3u ou .m3u8">
+                <div class="modal-actions">
+                    <button id="saveListBtn" class="confirm-btn">Salvar e Conectar</button>
+                    <button id="closeModalBtn" class="cancel-btn">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Player Principal (Hidden por padrão) -->
+        <main id="mainPlayer" class="screen hidden">
+            <nav class="side-nav">
+                <div class="nav-item active" data-view="live">📺 Canais</div>
+                <div class="nav-item" data-view="movie">🎬 Filmes</div>
+                <div class="nav-item" data-view="series">🍿 Séries</div>
+                <div class="nav-item" id="exitPlayer">🚪 Sair</div>
+            </nav>
+
+            <section class="content-area">
+                <div class="header-info">
+                    <input type="text" id="searchBar" placeholder="Pesquisar...">
+                    <div id="categoryFilter" class="chip-container"></div>
+                </div>
+                
+                <div class="display-grid">
+                    <aside class="items-list" id="itemsContainer"></aside>
+                    <article class="video-engine">
+                        <div class="player-container">
+                            <video id="videoPlayer" controls autoplay></video>
+                        </div>
+                        <div class="meta-data">
+                            <h2 id="viewingTitle">Selecione o conteúdo</h2>
+                            <p id="viewingGroup">CyberStream Engine v3.0</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js" type="module"></script>
+</body>
+</html>
